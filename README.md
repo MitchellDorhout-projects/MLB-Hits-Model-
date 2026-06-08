@@ -19,3 +19,4 @@ Record for playes with over .5 hits in a game
 Built with
 Python (scraping) · Google Apps Script (daily automation) · Google Sheets · Statcast / Baseball Savant 
 Next: move the pipeline off Google Sheets into a real database, add expected stats like xwOBA, and test how well-calibrated the predicted probabilities are.
+<img width="1920" height="1032" alt="MLB Exit Velo Model - Google Sheets - Google Chrome 6_8_2026 11_37_38 AM" src="https://github.com/user-attachments/assets/f410ce92-e4e1-4475-baf2-944a084ad700" />
