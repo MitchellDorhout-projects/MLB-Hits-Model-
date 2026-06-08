@@ -1,22 +1,18 @@
 # MLB-Hits-Model-
-MLB Hits Model
-A Python model that predicts which MLB hitters are about to produce, based on how hard they've been hitting the ball — paired with a tracker that records how every prediction turns out, so I can see whether it actually holds up over a full season.
-The idea
-How hard you hit the ball is way more stable than batting average over a short stretch. So when a hitter's contact is great but his results haven't caught up, the production is usually coming — and the model is a systematic way to find those guys before the box score does.
-For each hitter it builds a daily projection from three inputs: recent exit velocity (the main driver), the opposing pitcher and handedness matchup, and the game's projected run environment. It then ranks hitters on two boards — Hot Hitters, and a tighter Hot Hitters 95+ cut for balls hit 95+ mph (Statcast's hard-hit line).
-Two targets, two signals
-The model predicts two things that measure different skills:
+A fully automated Python model that figures out which MLB hitters are actually "hot" based on how hard they've been hitting the ball — plus a tracker that logs how every pick turns out so I can see if it really holds up over a full season.
 
-1+ hit — pure individual. Getting a hit is almost entirely on the batter, so it's the cleanest test of the exit-velocity signal.
-2+ hits + runs + RBIs — individual plus team. Runs and RBIs need teammates, so a hitter can crush the ball and still miss this one if the lineup goes quiet.
+The goal is telling apart guys who are actually hot from guys who just look hot. Batting average is way too noisy over a short stretch — it's fluky and rewards lucky bloop hits — but how hard you hit the ball is much more stable. So I built the whole thing around recent exit velocity (EV) instead of recent results.
+A hitter only makes the board if he clears every parameter I set — a mix of recent exit-velocity and hard-contact signals, the opposing-pitcher matchup, and the game's projected run environment. I'm keeping the exact thresholds to myself since that's the part that makes it work, but the point is nobody lands on the board on a hunch. They're there because they passed every check.
+The ones who qualify get ranked on two boards — Hot Hitters, and a tighter Hot Hitters 95+ cut for balls hit 95+ mph (Statcast's hard-hit line).
 
-Because of that, only the 2+ H+R+RBI target gets a filter requiring a projected team run total above 3.5 — matching the filter to the part of the stat that's outside the hitter's control. The 1-hit target skips it, since a hit doesn't care how many runs the team scores.
-Tracking how it performs
-The tracker locks in each prediction before games, records the real result after they go final, and keeps a running win-loss record across the season — so I can't fool myself by cherry-picking a hot stretch.
-548-300 
+Fully automated
+The whole thing runs on its own every day, no manual work:
+Pulls fresh Statcast data from Baseball Savant each morning
+Rebuilds both boards and re-checks every hitter against the qualifying parameters
+Factors in that day's pitching matchups and projected game environment
+Once games go final, logs the results and updates the running record automatically
 
-Record for playes with over .5 hits in a game 
 Built with
-Python (scraping) · Google Apps Script (daily automation) · Google Sheets · Statcast / Baseball Savant 
-Next: move the pipeline off Google Sheets into a real database, add expected stats like xwOBA, and test how well-calibrated the predicted probabilities are.
-<img width="1920" height="1032" alt="MLB Exit Velo Model - Google Sheets - Google Chrome 6_8_2026 11_37_38 AM" src="https://github.com/user-attachments/assets/f410ce92-e4e1-4475-baf2-944a084ad700" />
+Python · Google Apps Script · Google Sheets · Statcast / Baseball Savant
+<img width="1920" height="1080" alt="MLB Exit Velo Model - Google Sheets - Google Chrome 6_8_2026 12_38_32 PM" src="https://github.com/user-attachments/assets/8055092a-e831-4861-a505-e3d4df5b8360" />
+
