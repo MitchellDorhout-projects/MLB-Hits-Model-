@@ -14,5 +14,6 @@ Once games go final, logs the results and updates the running record automatical
 
 Built with
 Python · Google Apps Script · Google Sheets · Statcast / Baseball Savant
-<img width="1920" height="1080" alt="MLB Exit Velo Model - Google Sheets - Google Chrome 6_8_2026 12_38_32 PM" src="https://github.com/user-attachments/assets/8055092a-e831-4861-a505-e3d4df5b8360" />
+<img width="1920" height="872" alt="Screenshot 2026-06-08 123457" src="https://github.com/user-attachments/assets/effe303e-460f-4998-a650-9467d01cf897" />
+
 
